@@ -5,4 +5,4 @@ Files/folders:
 - tikz (folder): contains .tex files for TikZ drawings, called by ms.tex
 - COPYING.txt: license information.
 
-To produce PDF lecture notes, compile ms.tex using pdfLaTeX. Run biber to create a new .bbl file.
+To produce PDF lecture notes, compile ms.tex using pdfLaTeX and Biber.
