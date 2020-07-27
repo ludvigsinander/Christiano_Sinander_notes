@@ -1,0 +1,597 @@
+% Copyright (c) 2020 Carl Martin Ludvig Sinander.
+
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+% GNU General Public License for more details.
+
+% You should have received a copy of the GNU General Public License
+% along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+%                                   _     _      
+%    _ __  _ __ ___  __ _ _ __ ___ | |__ | | ___ 
+%   | '_ \| '__/ _ \/ _` | '_ ` _ \| '_ \| |/ _ \
+%   | |_) | | |  __/ (_| | | | | | | |_) | |  __/
+%   | .__/|_|  \___|\__,_|_| |_| |_|_.__/|_|\___|
+%   |_|                                          
+
+%    Ludvig Sinander
+%    5 Dec 2016
+
+
+%%% notes
+% in the article class, you cannot use [] in \title and \author
+% in the article class, \thanks goes directly after each authors' name
+
+
+
+%______________________________________________________________________________
+
+
+
+
+%    ____            _          
+%   | __ )  __ _ ___(_) ___ ___ 
+%   |  _ \ / _` / __| |/ __/ __|
+%   | |_) | (_| \__ \ | (__\__ \
+%   |____/ \__,_|___/_|\___|___/
+
+
+
+%%% make sure PDF output has the right dimensions
+%\pdfpagewidth=\paperwidth
+%\pdfpageheight=\paperheight
+
+
+%%% line spacing
+%\usepackage{setspace}
+
+
+%%% single space after ./!/?
+\frenchspacing
+
+
+%%% paragraphs
+%\setlength{\parindent}{18pt}
+	% indent size
+%\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+	% space between paragraphs
+
+
+%%% emphasis with slanted roman text
+\DeclareTextFontCommand{\emph}{\slshape}
+
+
+
+%______________________________________________________________________________
+
+
+
+
+%    ____            _                         
+%   |  _ \ __ _  ___| | ____ _  __ _  ___  ___ 
+%   | |_) / _` |/ __| |/ / _` |/ _` |/ _ \/ __|
+%   |  __/ (_| | (__|   < (_| | (_| |  __/\__ \
+%   |_|   \__,_|\___|_|\_\__,_|\__, |\___||___/
+%                              |___/           
+
+
+
+%%% fonts
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+
+
+%%% babel
+\usepackage[american,german,french,british]{babel}
+%\usepackage{csquotes}
+
+
+%%% microtype
+\usepackage[activate={true,nocompatibility}]{microtype}
+
+
+%%% csquotes
+\usepackage{csquotes}
+
+
+%%% bibliography
+\usepackage[backend=biber,autolang=other,style=apa,maxcitenames=5]{biblatex}
+\DeclareLanguageMapping{british}{british-apa}
+\DeclareLanguageMapping{american}{american-apa}
+\DeclareLanguageMapping{german}{german-apa}
+\DeclareLanguageMapping{french}{french-apa}
+\DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
+	% turn off stupid small caps for french
+
+
+%%% maths
+\usepackage{amsmath}
+	% a lot of math, e.g. \equation*
+\usepackage{amssymb}
+	% more math, e.g. \mathbb
+\usepackage{amsfonts}
+	% also sometimes useful
+\usepackage{amsthm}
+	% even more math, e.g. theoremstyle
+\usepackage[retainorgcmds]{IEEEtrantools}
+	% nice equation arrays
+\usepackage{mathtools}
+	% e.g. \coloneqq
+\usepackage{stmaryrd}
+	% e.g. \Mapsto for correspondences
+\usepackage{mleftright}
+	% \left and \right for matrices
+\usepackage{centernot}
+	% center \not for binary relations
+%\usepackage{amsbsy}
+	% for bold math (e.g. vectors)
+
+
+%%% graphics
+\usepackage{graphicx}
+	% basic package for figures
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.10}
+	% for drawing
+\usepackage{etoolbox}
+\AtBeginEnvironment{tikzpicture}{\shorthandoff{;}}
+	% make TikZ compatible with babel French (ffs)
+
+
+%%% nice appendices
+\usepackage[titletoc,title]{appendix}
+
+
+%%% datetime
+\usepackage{datetime}
+\newdateformat{datestyle}{ {\THEDAY} \monthname[\THEMONTH] \THEYEAR }
+
+
+%%% enumerate/itemize settings
+\usepackage{enumerate}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=(\arabic*)}
+\setlist[itemize,1]{label=--}
+\setlist[itemize,2]{label=--}
+\setlist[itemize,3]{label=--}
+\setlist[itemize,4]{label=--}
+
+
+%%% other useful packages
+\usepackage{xcolor}
+	% colouring
+\usepackage{verbatim}
+	% cite code
+\usepackage{gensymb}
+	% extra symbols, including degrees
+\usepackage{rotating}
+	% sideways tables and more
+\usepackage{subcaption}
+	% subfigures & subtables with own captions
+\usepackage{floatpag}
+\floatpagestyle{plain}
+	% commands for supressing page numbers in floats
+%\usepackage[amsthm]{ntheorem}
+	% extra customisation of theorems
+\usepackage{marvosym}
+	% weird symbols, e.g. \Letter
+
+%%% hyphenation
+\usepackage{hyphenat}
+\hyphenation{jour-nal}
+\hyphenation{uni-ver-sity}
+\hyphenation{more-over}
+\hyphenation{ac-ross}
+\hyphenation{def-ine}
+\hyphenation{def-ines}
+\hyphenation{def-ined}
+\hyphenation{stre-ngth-en}
+\hyphenation{stre-ngth-ens}
+\hyphenation{stre-ngth-ened}
+\hyphenation{stre-ngth-ening}
+\hyphenation{sin-gle-ton}
+\hyphenation{sin-gle-tons}
+\hyphenation{quasi-con-vex}
+\hyphenation{quasi-con-vex-ity}
+\hyphenation{quasi-con-cave}
+\hyphenation{quasi-con-cav-ity}
+\hyphenation{sup-er-mod-ul-ar}
+\hyphenation{sup-er-mod-ul-ar-ity}
+\hyphenation{quasi-sup-er-mod-ul-ar}
+\hyphenation{quasi-sup-er-mod-ul-ar-ity}
+\hyphenation{log-sup-er-mod-ul-ar}
+\hyphenation{log-sup-er-mod-ul-ar-ity}
+\hyphenation{po-set}
+\hyphenation{po-sets}
+\hyphenation{Bayes-ian}
+\hyphenation{Sin-and-er}
+\hyphenation{Masch-ler}
+\hyphenation{Kol-mog-or-ov}
+\hyphenation{Khin-chine}
+\hyphenation{Key-nes}
+\hyphenation{Keynes-ian}
+\hyphenation{Cur-ello}
+\hyphenation{Quar-ter-ly}
+\hyphenation{Ec-ono-met-rica}
+\hyphenation{Dov-er}
+\hyphenation{in-com-par-able}
+
+
+
+%______________________________________________________________________________
+
+
+
+
+%    _____ _                                       
+%   |_   _| |__   ___  ___  _ __ ___ _ __ ___  ___ 
+%     | | | '_ \ / _ \/ _ \| '__/ _ \ '_ ` _ \/ __|
+%     | | | | | |  __/ (_) | | |  __/ | | | | \__ \
+%     |_| |_| |_|\___|\___/|_|  \___|_| |_| |_|___/
+
+
+%%% theorem style
+\theoremstyle{definition}
+	% {definition} gives roman text
+	% {plain} gives italic text
+
+
+%%% environments
+	% the [section] option makes theorems section-numbered
+\newtheorem{theorem}{Theorem}%[section]
+\newtheorem{proposition}{Proposition}%[section]
+\newtheorem{lemma}{Lemma}%[section]
+\newtheorem{corollary}{Corollary}%[section]
+\newtheorem{remark}{Remark}%[section]
+\newtheorem{observation}{Observation}%[section]
+\newtheorem{example}{Example}%[section]
+\newtheorem{fact}{Fact}%[section]
+\newtheorem{definition}{Definition}%[section]
+\newtheorem{assumption}{Assumption}%[section]
+\newtheorem{exercise}{Exercise}%[section]
+\newtheorem*{notation}{Notation}
+\newtheorem*{claim}{Claim}
+\newtheorem*{conjecture}{Conjecture}
+
+
+%%% named theorem environment
+\newtheoremstyle{named}
+	{\topsep}					% ABOVESPACE
+	{\topsep}					% BELOWSPACE
+	{}							% BODYFONT
+	{0pt}						% INDENT (empty value is the same as 0pt)
+	{\bfseries}					% HEADFONT
+	{}							% HEADPUNCT
+	{5pt plus 1pt minus 1pt}	% HEADSPACE
+	{\thmnote{#3}}				% CUSTOM-HEAD-SPEC
+\theoremstyle{named}
+\newtheorem{namedthm}{}
+
+
+%%% QED symbol
+\renewcommand{\qedsymbol}{$\blacksquare$}
+	% solid black square for QED
+
+
+%%% the word 'proof' in slshape
+\usepackage{xpatch}
+\xpatchcmd{\proof}{\itshape}{\proofheadfont}{}{}
+\newcommand{\proofheadfont}{\slshape}
+
+
+
+%______________________________________________________________________________
+
+
+
+                                             
+%    _ __ ___   ___  _ __ ___                   
+%   | '_ ` _ \ / _ \| '__/ _ \                  
+%   | | | | | | (_) | | |  __/                  
+%   |_| |_| |_|\___/|_|  \___|                  
+%    _ __   __ _  ___| | ____ _  __ _  ___  ___ 
+%   | '_ \ / _` |/ __| |/ / _` |/ _` |/ _ \/ __|
+%   | |_) | (_| | (__|   < (_| | (_| |  __/\__ \
+%   | .__/ \__,_|\___|_|\_\__,_|\__, |\___||___/
+%   |_|                         |___/           
+
+
+%% hyperref and cleveref have to be loaded last
+
+
+%%% hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	filecolor=black,
+	urlcolor=black,
+}
+
+
+%%% cleveref
+\usepackage[nameinlink]{cleveref}
+\crefname{equation}{equation}{equations}
+\crefname{section}{section}{sections}
+\crefname{subsection}{section}{sections}
+\crefname{subsubsection}{section}{sections}
+\crefname{appsec}{appendix}{appendices}
+\crefname{footnote}{footnote}{footnotes}
+\crefname{figure}{figure}{figures}
+\crefname{table}{table}{tables}
+\crefname{theorem}{theorem}{theorems}
+\crefname{proposition}{proposition}{propositions}
+\crefname{lemma}{lemma}{lemmata}
+\crefname{corollary}{corollary}{corollaries}
+\crefname{remark}{remark}{remarks}
+\crefname{observation}{observation}{observations}
+\crefname{example}{example}{examples}
+\crefname{fact}{fact}{facts}
+\crefname{definition}{definition}{definitions}
+\crefname{assumption}{assumption}{assumptions}
+\crefname{exercise}{exercise}{exercises}
+\crefname{notation}{notation}{notation}
+\crefname{claim}{claim}{claims}
+\crefname{conjecture}{conjecture}{conjectures}
+
+
+
+%______________________________________________________________________________
+
+
+
+
+%    ____  _                _             _       
+%   / ___|| |__   ___  _ __| |_ ___ _   _| |_ ___ 
+%   \___ \| '_ \ / _ \| '__| __/ __| | | | __/ __|
+%    ___) | | | | (_) | |  | || (__| |_| | |_\__ \
+%   |____/|_| |_|\___/|_|   \__\___|\__,_|\__|___/
+
+
+%\newcommand{\underscore}{\underline{{ }{ }}}
+	% better to use \_. looks weird but copy-pastes correctly
+
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\wht}{\widehat}
+
+\newcommand{\dll}{\partial}
+
+\newcommand{\dd}{\mathrm{d}}
+
+\newcommand{\DD}{\mathrm{D}}
+
+\DeclareMathOperator*{\plim}{plim}
+
+\DeclareMathOperator*{\esssup}{ess\,sup}
+
+\DeclareMathOperator*{\essinf}{ess\,inf}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\DeclareMathOperator*{\arginf}{arg\,inf}
+
+\DeclareMathOperator*{\argsup}{arg\,sup}
+
+\DeclareMathOperator*{\interior}{int}
+
+\DeclareMathOperator*{\cl}{cl}
+
+\DeclareMathOperator*{\co}{co}
+
+\DeclareMathOperator*{\spann}{span}
+
+\DeclareMathOperator*{\determinant}{det}
+
+\DeclareMathOperator*{\rank}{rank}
+
+\DeclareMathOperator*{\tr}{tr}
+
+\DeclareMathOperator*{\sgn}{sgn}
+
+\DeclareMathOperator*{\diag}{diag}
+
+\DeclareMathOperator*{\vectorise}{vec}
+
+\DeclareMathOperator*{\dimension}{dim}
+
+\DeclareMathOperator*{\supp}{supp}
+
+\DeclareMathOperator*{\vex}{vex}
+
+\DeclareMathOperator*{\cav}{cav}
+
+\DeclareMathOperator*{\qvex}{qvex}
+
+\DeclareMathOperator*{\qcav}{qcav}
+
+\DeclareMathOperator*{\epi}{epi}
+
+\DeclareMathOperator*{\marg}{marg}
+
+\newcommand{\E}{\mathbf{E}}
+
+\newcommand{\PP}{\mathbf{P}}
+
+\newcommand{\Var}{\mathrm{Var}}
+
+\newcommand{\Cov}{\mathrm{Cov}}
+
+\newcommand{\Corr}{\mathrm{Corr}}
+
+\newcommand{\op}{\mathrm{o}_{\mathrm{p}}}
+
+\newcommand{\Op}{\mathrm{O}_{\mathrm{p}}}
+
+\newcommand{\oo}{\mathrm{o}}
+
+\newcommand{\OO}{\mathrm{O}}
+
+\newcommand{\R}{\mathbf{R}}
+
+\newcommand{\Q}{\mathbf{Q}}
+
+\newcommand{\C}{\mathbf{C}}
+
+\newcommand{\N}{\mathbf{N}}
+
+\newcommand{\Z}{\mathbf{Z}}
+
+\newcommand{\1}{\boldsymbol{1}}
+
+\newcommand{\0}{\boldsymbol{0}}
+
+\newcommand{\nullset}{\varnothing}
+
+\newcommand{\compl}{\textsc{c}}
+
+\newcommand{\join}{\vee}
+
+\newcommand{\meet}{\wedge}
+
+\newcommand{\Joinn}{\bigvee}
+
+\newcommand{\Meet}{\bigwedge}
+
+\newcommand{\union}{\cup}
+
+\newcommand{\intersect}{\cap}
+
+\newcommand{\Union}{\bigcup}
+
+\newcommand{\Intersect}{\bigcap}
+
+\newcommand\indep{\protect\mathpalette{\protect\indeP}{\perp}}
+  \def\indeP#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\newcommand{\trans}{{\scriptscriptstyle \top}}
+
+\newcommand{\conv}{\xrightarrow{\;\;\;}}
+
+\newcommand{\convp}{\xrightarrow{{\scriptscriptstyle \mathrm{\;p\;}}}}
+
+\newcommand{\convas}{\xrightarrow{{\scriptscriptstyle \mathrm{a.s.}}}}
+
+\newcommand{\convms}{\xrightarrow{{\scriptscriptstyle \mathrm{m.s.}}}}
+
+\newcommand{\convd}{\xrightarrow{{\scriptscriptstyle \mathrm{\;d\;}}}}
+
+\newcommand{\eqd}{\protect\overset{{\scriptscriptstyle \mathrm{d}}}{=}}
+
+\newcommand{\simiid}{\protect\overset{{\scriptscriptstyle \mathrm{iid}}}{\sim}}
+
+\newcommand{\simapprox}{\protect\overset{{\scriptscriptstyle \mathrm{a}}}{\sim}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\DeclarePairedDelimiter\inner{\langle}{\rangle}
+
+
+
+%______________________________________________________________________________
+
+
+
+
+%   __             _     _      _                
+%   \ \  __      _(_) __| | ___| |__   __ _ _ __ 
+%    \ \ \ \ /\ / / |/ _` |/ _ \ '_ \ / _` | '__|
+%     \ \ \ V  V /| | (_| |  __/ |_) | (_| | |   
+%      \_\ \_/\_/ |_|\__,_|\___|_.__/ \__,_|_|   
+
+
+% this code defines \widebar
+% code from http://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package
+
+\makeatletter
+\let\save@mathaccent\mathaccent
+\newcommand*\if@single[3]{%
+	\setbox0\hbox{${\mathaccent"0362{#1}}^H$}%
+	\setbox2\hbox{${\mathaccent"0362{\kern0pt#1}}^H$}%
+	\ifdim\ht0=\ht2 #3\else #2\fi
+	}
+%The bar will be moved to the right by a half of \macc@kerna, which is computed by amsmath:
+\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
+%If there's a superscript following the bar, then no negative kern may follow the bar;
+%an additional {} makes sure that the superscript is high enough in this case:
+\newcommand*\widebar[1]{\@ifnextchar^{{\wide@bar{#1}{0}}}{\wide@bar{#1}{1}}}
+%Use a separate algorithm for single symbols:
+\newcommand*\wide@bar[2]{\if@single{#1}{\wide@bar@{#1}{#2}{1}}{\wide@bar@{#1}{#2}{2}}}
+\newcommand*\wide@bar@[3]{%
+	\begingroup
+	\def\mathaccent##1##2{%
+%Enable nesting of accents:
+	  \let\mathaccent\save@mathaccent
+%If there's more than a single symbol, use the first character instead (see below):
+	  \if#32 \let\macc@nucleus\first@char \fi
+%Determine the italic correction:
+	  \setbox\z@\hbox{$\macc@style{\macc@nucleus}_{}$}%
+	  \setbox\tw@\hbox{$\macc@style{\macc@nucleus}{}_{}$}%
+	  \dimen@\wd\tw@
+	  \advance\dimen@-\wd\z@
+%Now \dimen@ is the italic correction of the symbol.
+	  \divide\dimen@ 3
+	  \@tempdima\wd\tw@
+	  \advance\@tempdima-\scriptspace
+%Now \@tempdima is the width of the symbol.
+	  \divide\@tempdima 10
+	  \advance\dimen@-\@tempdima
+%Now \dimen@ = (italic correction / 3) - (Breite / 10)
+	  \ifdim\dimen@>\z@ \dimen@0pt\fi
+%The bar will be shortened in the case \dimen@<0 !
+	  \rel@kern{0.6}\kern-\dimen@
+	  \if#31
+	    \overline{\rel@kern{-0.6}\kern\dimen@\macc@nucleus\rel@kern{0.4}\kern\dimen@}%
+	    \advance\dimen@0.4\dimexpr\macc@kerna
+%Place the combined final kern (-\dimen@) if it is >0 or if a superscript follows:
+	    \let\final@kern#2%
+	    \ifdim\dimen@<\z@ \let\final@kern1\fi
+	    \if\final@kern1 \kern-\dimen@\fi
+	  \else
+	    \overline{\rel@kern{-0.6}\kern\dimen@#1}%
+	  \fi
+	}%
+	\macc@depth\@ne
+	\let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+	\mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+	\macc@set@skewchar\relax
+	\let\mathaccentV\macc@nested@a
+%The following initialises \macc@kerna and calls \mathaccent:
+	\if#31
+	  \macc@nested@a\relax111{#1}%
+	\else
+%If the argument consists of more than one symbol, and if the first token is
+%a letter, use that letter for the computations:
+	  \def\gobble@till@marker##1\endmarker{}%
+	  \futurelet\first@char\gobble@till@marker#1\endmarker
+	  \ifcat\noexpand\first@char A\else
+	    \def\first@char{}%
+	  \fi
+	  \macc@nested@a\relax111{\first@char}%
+	\fi
+	\endgroup
+}
+\makeatother
+\newcommand\test[1]{%
+$#1{M}$ $#1{A}$ $#1{g}$ $#1{\beta}$ $#1{\mathcal A}^q$
+$#1{AB}^\sigma$ $#1{H}^C$ $#1{\sin z}$ $#1{W}_n$}
+
+
+
+%______________________________________________________________________________
